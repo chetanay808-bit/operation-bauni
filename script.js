@@ -1,5 +1,5 @@
 // 🔴 Aapka Google Apps Script Web App URL
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx-5msCPu4yC2zRrw4MBCFPEsQNkHSRABNiiZRs0GFQABGS0BYl0F7nZxVnndbavOcU/exec";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbzeFK3EUvTPiSJZhZAEi-KBKEW70169I_11GuV7XuIgqiRml01_u6Dapquh7Wabyo7M/exec";
 
 // Bulletproof Tracking Function (URL Parameters / GET Mode)
 function sendDataToSheet(payload) {

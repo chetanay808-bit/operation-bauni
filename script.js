@@ -1,14 +1,14 @@
 // 🔴 Aapka Google Apps Script Web App URL
 const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx-5msCPu4yC2zRrw4MBCFPEsQNkHSRABNiiZRs0GFQABGS0BYl0F7nZxVnndbavOcU/exec";
 
-// Function to send tracking data to Google Sheets
+// Bulletproof Tracking Function (URL Parameters / GET Mode)
 function sendDataToSheet(payload) {
     if (!BACKEND_URL || BACKEND_URL.includes("PASTE_YOUR")) return;
-    fetch(BACKEND_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+    
+    const params = new URLSearchParams(payload).toString();
+    fetch(`${BACKEND_URL}?${params}`, {
+        method: "GET",
+        mode: "no-cors"
     }).catch(err => console.log("Backend sync error:", err));
 }
 

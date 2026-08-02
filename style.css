@@ -1,0 +1,137 @@
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.btn-glow {
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 30px rgba(244, 63, 94, 0.7);
+    transform: translateY(-2px);
+}
+
+.page {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+.page.active {
+    display: flex !important;
+    opacity: 1;
+}
+
+/* Balloon Setup */
+#balloon-container {
+    overflow: hidden;
+    z-index: 20;
+}
+
+.balloon {
+    position: absolute;
+    width: 65px;
+    height: 80px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    cursor: pointer;
+    box-shadow: inset -6px -6px 12px rgba(0, 0, 0, 0.35);
+    animation: floatUp 6s infinite ease-in-out;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 31px;
+    width: 2px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(105vh) rotate(0deg); }
+    50% { transform: translateY(45vh) rotate(8deg); }
+    100% { transform: translateY(-15vh) rotate(-8deg); }
+}
+
+.popped {
+    animation: pop 0.15s ease-out forwards !important;
+}
+
+@keyframes pop {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.zoom-fast-img {
+    animation: zoomFast 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards;
+}
+
+@keyframes zoomFast {
+    0% { transform: scale(0.01); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Gifts Lock Visuals */
+.gift-card.locked {
+    opacity: 0.35;
+    filter: grayscale(90%);
+    pointer-events: none;
+}
+
+.gift-card.selected-gift {
+    border-color: #ff758f !important;
+    background: rgba(255, 117, 143, 0.18) !important;
+    box-shadow: 0 0 25px rgba(255, 117, 143, 0.4);
+    transform: scale(1.03);
+}
+
+/* Sunset Walking & Hand-Hold Eye Contact Animations */
+@keyframes walkAndLookLeft {
+    0% { transform: translateX(0) scaleX(1); }
+    80% { transform: translateX(75px) scaleX(1); }
+    100% { transform: translateX(75px) scaleX(1); }
+}
+
+@keyframes walkAndLookRight {
+    0% { transform: translateX(0) scaleX(1); }
+    80% { transform: translateX(-75px) scaleX(1); }
+    100% { transform: translateX(-75px) scaleX(-1); }
+}
+
+.start-walk-left {
+    animation: walkAndLookLeft 3.5s ease-in-out forwards;
+}
+
+.start-walk-right {
+    animation: walkAndLookRight 3.5s ease-in-out forwards;
+}
+
+/* Falling Elements */
+.leaf, .petal {
+    position: absolute;
+    background: rgba(255, 182, 193, 0.5);
+    border-radius: 0 100% 0 100%;
+    animation: flyDown 6s linear infinite;
+}
+
+@keyframes flyDown {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Text Word Spacing Fix */
+#shayari-text, #typewriter-text {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    word-spacing: 0.2rem !important;
+    letter-spacing: 0.02rem !important;
+}

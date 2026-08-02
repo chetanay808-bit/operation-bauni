@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Bauni ❤️</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white font-['Poppins'] overflow-hidden select-none h-screen w-screen flex justify-center items-center">
+
+    <!-- PAGE 0: Intro Hook -->
+    <section id="page-0" class="page active flex flex-col justify-center items-center h-full px-6 text-center w-full">
+        <div class="glass-card p-8 rounded-3xl max-w-sm w-full border border-pink-500/20 shadow-2xl shadow-pink-500/10">
+            <p class="text-lg md:text-xl text-pink-100 leading-relaxed font-light mb-8">
+                "This isn't just a website... <br>It's something I made <span class="text-pink-400 font-semibold">only for you</span>. ❤️"
+            </p>
+            <button onclick="startJourney()" class="btn-glow bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform active:scale-95 transition-all duration-300">
+                Begin the Journey
+            </button>
+        </div>
+    </section>
+
+    <!-- PAGE 1: Balloon Pop & Surprise Reveal -->
+    <section id="page-1" class="page hidden flex-col items-center justify-between h-full w-full py-10 px-4 relative">
+        <div class="text-center z-10 mt-4">
+            <h1 class="font-['Dancing_Script'] text-4xl text-pink-400 mb-1">Hey Bauni ❤️</h1>
+            <p class="text-sm text-gray-300">Happy Friendship Day</p>
+            <p class="text-xs text-pink-300 mt-3 bg-pink-950/40 border border-pink-500/30 px-4 py-1.5 rounded-full inline-block animate-pulse">
+                Pop all balloons for your surprise 🎈
+            </p>
+        </div>
+
+        <!-- Floating Balloons Area -->
+        <div id="balloon-container" class="absolute inset-0 w-full h-full overflow-hidden pointer-events-auto"></div>
+
+        <!-- Pop Surprise Modal -->
+        <div id="reveal-modal" class="fixed inset-0 bg-black/95 backdrop-blur-md hidden opacity-0 pointer-events-none flex-col justify-center items-center z-50 p-6 transition-all duration-300">
+            <div id="image-wrapper" class="relative">
+                <img src="bauni.png" alt="Bauni Surprise" id="surprise-img" class="zoom-fast-img rounded-2xl border-2 border-pink-500/50 shadow-2xl shadow-pink-500/40 max-h-[40vh] object-contain">
+            </div>
+
+            <div class="glass-card mt-6 p-6 rounded-2xl max-w-sm w-full text-center border border-pink-500/20">
+                <h3 class="font-['Dancing_Script'] text-2xl text-pink-400 mb-2">Happy Friendship Day, Meri Pyari Bauni ❤️</h3>
+                <p class="text-xs text-gray-200 leading-relaxed font-light mb-6">
+                    Some people become friends by chance...<br><br>
+                    But a few become the reason behind your smile every single day.<br><br>
+                    Thank you for being one of those beautiful people in my life.
+                </p>
+                <button onclick="goToPage(2)" class="btn-glow bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold py-2.5 px-6 rounded-full text-sm">
+                    Continue ❤️
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2: 3 Gifts Selection -->
+    <section id="page-2" class="page hidden flex-col items-center justify-center h-full w-full py-8 px-4 relative z-10">
+        <div class="text-center mb-6">
+            <h2 class="font-['Dancing_Script'] text-3xl md:text-4xl text-pink-400 mb-1">Choose ONE Gift Carefully ❤️</h2>
+            <p class="text-xs text-gray-300 font-light">Tap a box to reveal your gift. Remaining will be locked!</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 max-w-sm w-full mb-6">
+            <div id="gift-1" onclick="selectGift(1, 'A Date (Sponsored by YOU 😜)')" class="gift-card glass-card p-4 rounded-2xl border border-pink-500/20 flex items-center justify-between cursor-pointer transition-all duration-300">
+                <div class="flex items-center space-x-4">
+                    <div class="gift-icon text-3xl transition-transform duration-300">🎁</div>
+                    <div>
+                        <h3 class="gift-title font-semibold text-pink-200 text-sm">Gift Box 1</h3>
+                        <p class="gift-desc text-xs text-pink-400/70 italic">Tap to open...</p>
+                    </div>
+                </div>
+                <span class="lock-icon text-gray-500 text-lg hidden"><i class="fa-solid fa-lock"></i></span>
+            </div>
+
+            <div id="gift-2" onclick="selectGift(2, 'Dream Date (Sponsored by ME ❤️)')" class="gift-card glass-card p-4 rounded-2xl border border-pink-500/20 flex items-center justify-between cursor-pointer transition-all duration-300">
+                <div class="flex items-center space-x-4">
+                    <div class="gift-icon text-3xl transition-transform duration-300">🎁</div>
+                    <div>
+                        <h3 class="gift-title font-semibold text-pink-200 text-sm">Gift Box 2</h3>
+                        <p class="gift-desc text-xs text-pink-400/70 italic">Tap to open...</p>
+                    </div>
+                </div>
+                <span class="lock-icon text-gray-500 text-lg hidden"><i class="fa-solid fa-lock"></i></span>
+            </div>
+
+            <div id="gift-3" onclick="selectGift(3, 'Shopping Spree (Sponsored by ME 🛍️)')" class="gift-card glass-card p-4 rounded-2xl border border-pink-500/20 flex items-center justify-between cursor-pointer transition-all duration-300">
+                <div class="flex items-center space-x-4">
+                    <div class="gift-icon text-3xl transition-transform duration-300">🎁</div>
+                    <div>
+                        <h3 class="gift-title font-semibold text-pink-200 text-sm">Gift Box 3</h3>
+                        <p class="gift-desc text-xs text-pink-400/70 italic">Tap to open...</p>
+                    </div>
+                </div>
+                <span class="lock-icon text-gray-500 text-lg hidden"><i class="fa-solid fa-lock"></i></span>
+            </div>
+        </div>
+
+        <div id="gift-status" class="text-center opacity-0 transition-opacity duration-500">
+            <p class="text-xs text-pink-400 font-semibold mb-3">Choice Locked Successfully! ❤️</p>
+            <button onclick="goToPage(3)" class="btn-glow bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold py-2.5 px-6 rounded-full text-sm">
+                Next Story 🌅
+            </button>
+        </div>
+    </section>
+
+    <!-- PAGE 3: Sunset Animated Walk & Eye-to-Eye Contact -->
+    <section id="page-3" class="page hidden flex-col items-center justify-between h-full w-full py-8 px-4 relative z-10 overflow-hidden bg-gradient-to-b from-rose-950 via-purple-950 to-black">
+        <div id="leaves-container" class="absolute inset-0 pointer-events-none z-0"></div>
+
+        <div class="text-center z-10 mt-2">
+            <h2 class="font-['Dancing_Script'] text-3xl text-pink-300">Our Beginning ✨</h2>
+        </div>
+
+        <!-- Animated Avatars Scene -->
+        <div class="relative w-full max-w-sm h-56 flex items-end justify-between px-6 z-10 mb-2">
+            
+            <!-- You Avatar (Slightly Taller) -->
+            <div id="you-avatar" class="walk-left flex flex-col items-center z-10">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-pink-400 overflow-hidden shadow-lg shadow-pink-500/50 bg-gray-900">
+                    <img src="you.jpg" alt="You" class="w-full h-full object-cover">
+                </div>
+                <p class="text-[10px] text-pink-300 font-semibold mt-1">YOU</p>
+            </div>
+
+            <!-- Glowing Heart in Center -->
+            <div id="center-heart" class="opacity-0 transition-opacity duration-700 text-3xl mb-12 animate-bounce z-20">
+                ❤️
+            </div>
+
+            <!-- Bauni Avatar (Slightly Shorter Height) -->
+            <div id="bauni-avatar" class="walk-right flex flex-col items-center z-10 mb-1">
+                <div class="w-14 h-14 md:w-18 md:h-18 rounded-full border-2 border-pink-400 overflow-hidden shadow-lg shadow-pink-500/50 bg-gray-900">
+                    <img src="bauni_avatar.jpg" alt="Bauni" class="w-full h-full object-cover">
+                </div>
+                <p class="text-[10px] text-pink-300 font-semibold mt-1">BAUNI</p>
+            </div>
+
+            <!-- Sunset Horizon Line -->
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
+        </div>
+
+        <!-- Typewriter Card -->
+        <div class="glass-card p-6 rounded-2xl max-w-sm w-full text-center border border-pink-500/20 z-10 min-h-[130px] flex flex-col justify-center items-center">
+            <p id="typewriter-text" class="text-xs md:text-sm text-pink-100 font-light leading-relaxed whitespace-pre-line"></p>
+
+            <button id="page3-next-btn" onclick="goToPage(4)" class="btn-glow bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold py-2.5 px-6 rounded-full text-sm mt-4 opacity-0 transition-opacity duration-500 pointer-events-none">
+                Read My Heart 🌹
+            </button>
+        </div>
+    </section>
+
+    <!-- PAGE 4: Rose Petals & Shayari -->
+    <section id="page-4" class="page hidden flex-col items-center justify-between h-full w-full py-8 px-6 relative z-10">
+        <div id="petals-container" class="absolute inset-0 pointer-events-none"></div>
+
+        <div class="text-center z-10 mt-2">
+            <h2 class="font-['Dancing_Script'] text-3xl text-pink-400 mb-1">Straight From My Heart ❤️</h2>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl max-w-sm w-full text-center border border-pink-500/30 shadow-2xl z-10 my-auto max-h-[60vh] overflow-y-auto">
+            <p id="shayari-text" class="text-xs md:text-sm text-pink-100 font-light leading-relaxed italic whitespace-pre-line"></p>
+        </div>
+
+        <button id="page4-next-btn" onclick="goToPage(5)" class="btn-glow bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold py-3 px-8 rounded-full text-sm z-10 opacity-0 transition-opacity duration-500 pointer-events-none my-2">
+            One Last Question 💍
+        </button>
+    </section>
+
+    <!-- PAGE 5: Proposal Ring -->
+    <section id="page-5" class="page hidden flex-col items-center justify-center h-full w-full px-6 text-center relative z-10">
+        <div class="text-5xl mb-6 animate-pulse">💍</div>
+        <div class="glass-card p-8 rounded-3xl max-w-sm w-full border border-pink-500/30 shadow-2xl">
+            <h3 class="font-['Dancing_Script'] text-3xl text-pink-400 mb-4">Bauni...</h3>
+            <p class="text-xs md:text-sm text-gray-200 leading-relaxed font-light mb-8">
+                I don't just want to celebrate Friendship Day with you...<br><br>
+                I want to celebrate every single moment of my life with you.<br><br>
+                <span class="text-pink-300 font-semibold text-base">Will you be my girlfriend? ❤️</span>
+            </p>
+
+            <div class="flex justify-center space-x-4">
+                <button onclick="handleProposalAnswer('YES')" class="btn-glow bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform active:scale-95 transition-all">
+                    YES ❤️
+                </button>
+                <button onclick="confirmNo()" class="bg-gray-800 text-gray-300 font-medium py-3 px-6 rounded-full text-xs border border-gray-600 active:scale-95 transition-all">
+                    NO 💔
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 6: Outcome -->
+    <section id="page-6" class="page hidden flex-col items-center justify-center h-full w-full px-6 text-center relative z-10">
+        <div id="outcome-container" class="w-full max-w-sm"></div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

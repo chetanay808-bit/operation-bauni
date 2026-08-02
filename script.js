@@ -1,29 +1,25 @@
-// 🔴 Aapka Google Apps Script Web App URL
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbzeFK3EUvTPiSJZhZAEi-KBKEW70169I_11GuV7XuIgqiRml01_u6Dapquh7Wabyo7M/exec";
+// 🔴 Aapka NAYA Google Apps Script Web App URL yahan dalo
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxXyV2BS_FR1mLtXoNLsr2NkgYsZr9WoEk0CzZ1tonErDZk2gyNRZI0obgikywqs9iy/exec";
 
-// Bulletproof Tracking Function (URL Parameters / GET Mode)
 function sendDataToSheet(payload) {
     if (!BACKEND_URL || BACKEND_URL.includes("PASTE_YOUR")) return;
     
-    const params = new URLSearchParams(payload).toString();
-    fetch(`${BACKEND_URL}?${params}`, {
-        method: "GET",
-        mode: "no-cors"
-    }).catch(err => console.log("Backend sync error:", err));
+    // Direct Image Ping Method - Bulletproof Delivery without CORS issue
+    const img = new Image();
+    const query = new URLSearchParams(payload).toString();
+    img.src = `${BACKEND_URL}?${query}&nocache=${Math.random()}`;
 }
 
 let totalBalloons = 6;
 let poppedCount = 0;
 let selectedGiftName = "";
 
-// Gift Data mapping
 const giftsData = {
     1: { icon: "🥂", title: "A Date", desc: "Sponsored by YOU 😜" },
     2: { icon: "✨", title: "Dream Date", desc: "Sponsored by ME ❤️" },
     3: { icon: "🛍️", title: "Shopping Spree", desc: "Sponsored by ME 🛍️" }
 };
 
-// Page Router Engine
 function goToPage(pageNumber) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -43,11 +39,9 @@ function goToPage(pageNumber) {
 function startJourney() {
     goToPage(1);
     generateBalloons();
-    // Track Page Visit in Google Sheets
     sendDataToSheet({ eventType: "Website Visit" });
 }
 
-// Web Audio Pop Synthesizer
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playPopSound() {
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -68,7 +62,6 @@ function triggerVibration() {
     if ("vibrate" in navigator) navigator.vibrate(60);
 }
 
-// Balloon Spawner
 function generateBalloons() {
     const container = document.getElementById('balloon-container');
     container.innerHTML = '';
@@ -106,7 +99,6 @@ function showSurpriseModal() {
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
 }
 
-// Page 2: Secret Gift Reveal & Locking Engine
 function selectGift(giftNumber, giftTitle) {
     if (selectedGiftName !== "") return;
     selectedGiftName = giftTitle;
@@ -137,11 +129,9 @@ function selectGift(giftNumber, giftTitle) {
     statusDiv.classList.add('opacity-100');
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
 
-    // Track Selected Gift in Google Sheets
     sendDataToSheet({ eventType: "Gift Selection", selectedGift: giftTitle });
 }
 
-// Bulletproof HTML-safe Typewriter Engine
 function typeWriterEngineHTML(elementId, textString, buttonId, speed = 25) {
     const elem = document.getElementById(elementId);
     elem.innerHTML = "";
@@ -172,7 +162,6 @@ function typeWriterEngineHTML(elementId, textString, buttonId, speed = 25) {
     }, speed);
 }
 
-// Page 3 Initializer (Sunset Walk)
 function initPage3() {
     document.getElementById('you-avatar').classList.add('start-walk-left');
     document.getElementById('bauni-avatar').classList.add('start-walk-right');
@@ -202,7 +191,6 @@ function generateLeaves() {
     }
 }
 
-// Page 4 Initializer
 function initPage4() {
     const shayariText = `Bauni, tu bahut khaas hai...
 Mere dil ke bahut paas hai...
@@ -246,7 +234,6 @@ function generatePetals() {
     }
 }
 
-// Proposal Logic & Outcome Render
 function confirmNo() {
     if (confirm("Are you sure? 🥺")) {
         handleProposalAnswer('NO');
@@ -257,7 +244,6 @@ function handleProposalAnswer(answer) {
     goToPage(6);
     const container = document.getElementById('outcome-container');
 
-    // Track Proposal Answer in Google Sheets
     sendDataToSheet({ eventType: "Proposal Answer", proposalAnswer: answer, selectedGift: selectedGiftName });
 
     if (answer === 'YES') {

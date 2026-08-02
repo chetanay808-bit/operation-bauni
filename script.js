@@ -1,3 +1,17 @@
+// 🔴 Aapka Google Apps Script Web App URL
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx-5msCPu4yC2zRrw4MBCFPEsQNkHSRABNiiZRs0GFQABGS0BYl0F7nZxVnndbavOcU/exec";
+
+// Function to send tracking data to Google Sheets
+function sendDataToSheet(payload) {
+    if (!BACKEND_URL || BACKEND_URL.includes("PASTE_YOUR")) return;
+    fetch(BACKEND_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).catch(err => console.log("Backend sync error:", err));
+}
+
 let totalBalloons = 6;
 let poppedCount = 0;
 let selectedGiftName = "";
@@ -29,6 +43,8 @@ function goToPage(pageNumber) {
 function startJourney() {
     goToPage(1);
     generateBalloons();
+    // Track Page Visit in Google Sheets
+    sendDataToSheet({ eventType: "Website Visit" });
 }
 
 // Web Audio Pop Synthesizer
@@ -120,15 +136,16 @@ function selectGift(giftNumber, giftTitle) {
     statusDiv.classList.remove('opacity-0');
     statusDiv.classList.add('opacity-100');
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+
+    // Track Selected Gift in Google Sheets
+    sendDataToSheet({ eventType: "Gift Selection", selectedGift: giftTitle });
 }
 
-// Bulletproof HTML-safe Typewriter Engine preserving Spaces & Linebreaks
+// Bulletproof HTML-safe Typewriter Engine
 function typeWriterEngineHTML(elementId, textString, buttonId, speed = 25) {
     const elem = document.getElementById(elementId);
     elem.innerHTML = "";
     let i = 0;
-    
-    // Replace newline with <br> and space with &nbsp; for absolute preservation
     const charArray = Array.from(textString);
 
     const timer = setInterval(() => {
@@ -185,7 +202,7 @@ function generateLeaves() {
     }
 }
 
-// Page 4 Initializer (Custom Heartfelt Shayari)
+// Page 4 Initializer
 function initPage4() {
     const shayariText = `Bauni, tu bahut khaas hai...
 Mere dil ke bahut paas hai...
@@ -239,6 +256,9 @@ function confirmNo() {
 function handleProposalAnswer(answer) {
     goToPage(6);
     const container = document.getElementById('outcome-container');
+
+    // Track Proposal Answer in Google Sheets
+    sendDataToSheet({ eventType: "Proposal Answer", proposalAnswer: answer, selectedGift: selectedGiftName });
 
     if (answer === 'YES') {
         container.innerHTML = `
